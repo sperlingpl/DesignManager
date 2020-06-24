@@ -1,7 +1,4 @@
-﻿[GroupBox1]
-Coordinates=10,285,70,51
-
-[AboutMenuItem]
+﻿[AboutMenuItem]
 Coordinates=274,78,92,33
 
 [Plik1]
@@ -26,7 +23,7 @@ Coordinates=274,298,70,33
 Coordinates=274,353,81,33
 
 []
-Coordinates=145,153,82,33
+Coordinates=10,285,70,51
 
 [ProjectsCompletionFilterComboBox]
 Coordinates=305,10,84,105

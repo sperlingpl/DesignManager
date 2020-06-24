@@ -263,7 +263,7 @@ object FirstRunConfigForm: TFirstRunConfigForm
     FileTypes = <
       item
         DisplayName = 'Plik bazy danych'
-        FileMask = '.ddb'
+        FileMask = '*.ddb'
       end>
     Options = []
     Left = 40

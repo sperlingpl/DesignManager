@@ -87,6 +87,17 @@ object AboutBoxForm: TAboutBoxForm
       WordWrap = True
       IsControl = True
     end
+    object JvPoweredByJVCL1: TJvPoweredByJVCL
+      Left = 8
+      Top = 120
+      URL = 'http://jvcl.delphi-jedi.org/'
+    end
+    object RzVersionInfoStatus1: TRzVersionInfoStatus
+      Left = 168
+      Top = 37
+      Field = vifProductVersion
+      VersionInfo = RzVersionInfo1
+    end
   end
   object OKButton: TButton
     Left = 111
@@ -98,5 +109,9 @@ object AboutBoxForm: TAboutBoxForm
     ModalResult = 1
     TabOrder = 1
     OnClick = OKButtonClick
+  end
+  object RzVersionInfo1: TRzVersionInfo
+    Left = 200
+    Top = 80
   end
 end

@@ -76,7 +76,7 @@ object AddProjectForm: TAddProjectForm
     Width = 153
     Height = 21
     Date = 43996.000000000000000000
-    Time = 0.372535636575776200
+    Time = 0.372535636575776100
     TabOrder = 3
   end
   object ComboBoxEx1: TComboBoxEx

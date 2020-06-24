@@ -3,7 +3,7 @@ unit frmAbout;
 interface
 
 uses WinApi.Windows, System.SysUtils, System.Classes, Vcl.Graphics,
-  Vcl.Forms, Vcl.Controls, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
+  Vcl.Forms, Vcl.Controls, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, JvExControls, JvPoweredBy, RzStatus;
 
 type
   TAboutBoxForm = class(TForm)
@@ -14,6 +14,9 @@ type
     Copyright: TLabel;
     Comments: TLabel;
     OKButton: TButton;
+    JvPoweredByJVCL1: TJvPoweredByJVCL;
+    RzVersionInfoStatus1: TRzVersionInfoStatus;
+    RzVersionInfo1: TRzVersionInfo;
     procedure OKButtonClick(Sender: TObject);
   private
     { Private declarations }

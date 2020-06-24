@@ -1,15 +1,13 @@
-unit frmProjectDetails;
+unit frmProject;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
 
 type
-  TProjectDetailsForm = class(TForm)
-    GroupBox1: TGroupBox;
-    Label1: TLabel;
+  TForm1 = class(TForm)
   private
     { Private declarations }
   public
@@ -17,7 +15,7 @@ type
   end;
 
 var
-  ProjectDetailsForm: TProjectDetailsForm;
+  Form1: TForm1;
 
 implementation
 

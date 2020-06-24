@@ -11,6 +11,7 @@ type
     procedure CreateTables;
   public
     procedure Connect(Path: String);
+    procedure Close;
   end;
 
 var
@@ -26,6 +27,11 @@ const
   DBVersion = 1;
 
 { TDataConnection }
+
+procedure TDataConnection.Close;
+begin
+  MainDataModule.MainFDConnection.Close;
+end;
 
 procedure TDataConnection.Connect(Path: String);
 var
@@ -73,7 +79,7 @@ end;
 initialization
 
 begin
-  dataConnection := TDataConnection.Create;
+//  dataConnection := TDataConnection.Create;
 end;
 
 end.
