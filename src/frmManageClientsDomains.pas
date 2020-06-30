@@ -11,8 +11,6 @@ uses
 
 type
   TManageClientsDomainsForm = class(TForm)
-    FDQuery1: TFDQuery;
-    DataSource1: TDataSource;
     btnAdd: TButton;
     btnDelete: TButton;
     btnClose: TButton;
@@ -25,10 +23,15 @@ type
     procedure lstDomainsDblClick(Sender: TObject);
     procedure btnEditClick(Sender: TObject);
     procedure lstDomainsItemChanged(Sender: TObject; Index: Integer);
+    procedure btnAddClick(Sender: TObject);
+    procedure btnDeleteClick(Sender: TObject);
+    procedure edtNameChange(Sender: TObject);
   private
     { Private declarations }
 
-    DataModule: TManageClientsDomainsDM;
+    DataModule: IManageClientsDomainsDM;
+
+    procedure LoadList;
   public
     { Public declarations }
   end;
@@ -40,9 +43,27 @@ implementation
 
 {$R *.dfm}
 
+procedure TManageClientsDomainsForm.btnAddClick(Sender: TObject);
+begin
+  if Trim(edtName.Text) = '' then
+    Exit;
+
+  DataModule.Add(edtName.Text);
+  LoadList;
+end;
+
 procedure TManageClientsDomainsForm.btnCloseClick(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TManageClientsDomainsForm.btnDeleteClick(Sender: TObject);
+var
+  ClientDomain: TClientDomain;
+begin
+  ClientDomain := lstDomains.Items.Objects[lstDomains.ItemIndex] as TClientDomain;
+  DataModule.Delete(ClientDomain);
+  LoadList;
 end;
 
 procedure TManageClientsDomainsForm.btnEditClick(Sender: TObject);
@@ -50,25 +71,49 @@ begin
   lstDomains.ShowEditor;
 end;
 
-procedure TManageClientsDomainsForm.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TManageClientsDomainsForm.edtNameChange(Sender: TObject);
 begin
-  DataModule.Free;
+  if Trim(edtName.Text) = '' then
+    btnAdd.Enabled := False
+  else
+    btnAdd.Enabled := True;
+end;
+
+procedure TManageClientsDomainsForm.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  I: Integer;
+begin
+  for I := 0 to lstDomains.Count - 1 do
+    lstDomains.Items.Objects[I].Free;
+
+  (DataModule as TDataModule).Free;
+
   Action := caFree;
 end;
 
 procedure TManageClientsDomainsForm.FormCreate(Sender: TObject);
+begin
+  btnAdd.Enabled := False;
+  DataModule := TManageClientsDomainsDM.Create(nil);
+  LoadList;
+end;
+
+procedure TManageClientsDomainsForm.LoadList;
 var
   List: TList<TClientDomain>;
   I: Integer;
 begin
-  DataModule := TManageClientsDomainsDM.Create(nil);
+  lstDomains.Items.Clear;
+  edtName.Text := '';
+
   List := DataModule.GetList;
-  FDQuery1.OpenOrExecute;
 
   for I := 0 to List.Count - 1 do
   begin
-    lstDomains.Add(List[I].Name);
+    lstDomains.AddItem(List[I].Name, List[I]);
   end;
+
+  List.Free;
 end;
 
 procedure TManageClientsDomainsForm.lstDomainsDblClick(Sender: TObject);
@@ -77,17 +122,12 @@ begin
 end;
 
 procedure TManageClientsDomainsForm.lstDomainsItemChanged(Sender: TObject; Index: Integer);
+var
+  ClientDomain: TClientDomain;
 begin
-  if Index > -1 then
-  begin
-    btnEdit.Enabled := True;
-    btnDelete.Enabled := True;
-  end
-  else
-  begin
-    btnEdit.Enabled := False;
-    btnDelete.Enabled := False;
-  end;
+  ClientDomain := lstDomains.Items.Objects[Index] as TClientDomain;
+  ClientDomain.Name := lstDomains.Items[Index];
+  DataModule.Update(ClientDomain);
 end;
 
 end.

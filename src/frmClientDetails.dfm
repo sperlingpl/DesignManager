@@ -13,7 +13,6 @@ object ClientDetailsForm: TClientDetailsForm
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
-  Visible = True
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -63,23 +62,13 @@ object ClientDetailsForm: TClientDetailsForm
     TabOrder = 1
     OnClick = CancelButtonClick
   end
-  object NameDBEdit: TDBEdit
-    Left = 17
-    Top = 35
-    Width = 602
-    Height = 21
-    Anchors = [akLeft, akTop, akRight]
-    DataField = 'name'
-    DataSource = DataSource1
-    TabOrder = 2
-  end
   object EditClientGroupButton: TButton
     Left = 238
     Top = 90
     Width = 95
     Height = 25
     Caption = 'Zarz'#261'dzaj'
-    TabOrder = 3
+    TabOrder = 2
     OnClick = EditClientGroupButtonClick
   end
   object DBLookupComboBox1: TDBLookupComboBox
@@ -89,8 +78,7 @@ object ClientDetailsForm: TClientDetailsForm
     Height = 21
     KeyField = 'domain'
     ListField = 'domainName'
-    ListSource = DataSource1
-    TabOrder = 4
+    TabOrder = 3
   end
   inline TextEditorFrame1: TTextEditorFrame
     Left = 16
@@ -98,7 +86,7 @@ object ClientDetailsForm: TClientDetailsForm
     Width = 609
     Height = 385
     Anchors = [akLeft, akTop, akRight, akBottom]
-    TabOrder = 5
+    TabOrder = 4
     ExplicitLeft = 16
     ExplicitTop = 152
     ExplicitWidth = 609
@@ -133,29 +121,12 @@ object ClientDetailsForm: TClientDetailsForm
       end
     end
   end
-  object ToolBar1: TToolBar
-    Left = 0
-    Top = 0
-    Width = 642
-    Height = 29
-    Caption = 'ToolBar1'
-    TabOrder = 6
-  end
-  object FDQuery1: TFDQuery
-    Connection = MainDataModule.MainFDConnection
-    SQL.Strings = (
-      
-        'SELECT Clients.id, Clients.name, Clients.description, Clients.do' +
-        'main, ClientDomains.name as domainName '
-      'FROM Clients'
-      'LEFT JOIN ClientDomains'
-      'ON Clients.domain= ClientDomains.id')
-    Left = 24
-    Top = 312
-  end
-  object DataSource1: TDataSource
-    DataSet = FDQuery1
-    Left = 64
-    Top = 312
+  object edtName: TEdit
+    Left = 17
+    Top = 35
+    Width = 608
+    Height = 21
+    TabOrder = 5
+    Text = 'edtName'
   end
 end

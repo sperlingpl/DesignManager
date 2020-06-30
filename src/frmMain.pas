@@ -14,7 +14,8 @@ uses
   FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, Vcl.Mask, Vcl.DBCtrls, uDataModule, System.Rtti,
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt, Vcl.Bind.DBEngExt, Data.Bind.Components,
   Data.Bind.DBScope, System.DateUtils, frmProjectDetails, Vcl.Grids, Vcl.DBGrids, Vcl.Touch.GestureCtrls,
-  frmClientDetails, ovcbase, ovcclock, ChromeTabs, Vcl.RibbonLunaStyleActnCtrls, Vcl.Ribbon;
+  frmClientDetails, ovcbase, ovcclock, ChromeTabs, Vcl.RibbonLunaStyleActnCtrls, Vcl.Ribbon, Vcl.ExtCtrls, Vcl.WinXCtrls,
+  Vcl.CategoryButtons, JvPageList, JvExControls, Vcl.WinXCalendars, frmManageClientsDomains;
 
 type
   TMainForm = class(TForm)
@@ -30,9 +31,6 @@ type
     DataSource1: TDataSource;
     Dane1: TMenuItem;
     Klienci1: TMenuItem;
-    PageControl1: TPageControl;
-    TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
     Edit1: TEdit;
     ClientsDataSource: TDataSource;
     ClientsFDQuery: TFDQuery;
@@ -42,6 +40,12 @@ type
     ClientDomainsFDQuery: TFDQuery;
     ClientDomainsDataSource: TDataSource;
     DBLookupComboBox1: TDBLookupComboBox;
+    spltvwMain: TSplitView;
+    ctgrybtns1: TCategoryButtons;
+    jvpglst1: TJvPageList;
+    jvstndrdpgProjects: TJvStandardPage;
+    jvstndrdpgClients: TJvStandardPage;
+    CalendarView1: TCalendarView;
     procedure Button1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure AboutMenuItemClick(Sender: TObject);
@@ -50,6 +54,12 @@ type
     procedure ProjectsCompletionFilterComboBoxChange(Sender: TObject);
     procedure AddClientButtonClick(Sender: TObject);
     procedure ClientsListViewDblClick(Sender: TObject);
+    procedure ctgrybtns1Categories0Items0Click(Sender: TObject);
+    procedure ctgrybtns1Categories0Items1Click(Sender: TObject);
+    procedure CalendarView1DrawDayItem(Sender: TObject; DrawParams: TDrawViewInfoParams;
+      CalendarViewViewInfo: TCellItemViewInfo);
+    procedure FormCreate(Sender: TObject);
+    procedure ctgrybtns1Categories1Items0Click(Sender: TObject);
   private
     { Private declarations }
 
@@ -85,6 +95,14 @@ begin
   AddProjectForm.ShowModal;
 end;
 
+procedure TMainForm.CalendarView1DrawDayItem(Sender: TObject; DrawParams: TDrawViewInfoParams;
+  CalendarViewViewInfo: TCellItemViewInfo);
+begin
+
+  if DayOfWeek(CalendarViewViewInfo.Date) in [1, 7] then
+    DrawParams.ForegroundColor := clRed;
+end;
+
 procedure TMainForm.ClientsListViewDblClick(Sender: TObject);
 var
   Form: TClientDetailsForm;
@@ -92,6 +110,24 @@ begin
   Form := TClientDetailsForm.Create(Self);
   Form.ClientId := StrToInt(ClientsListView.Selected.Caption);
   Form.Show;
+end;
+
+procedure TMainForm.ctgrybtns1Categories0Items0Click(Sender: TObject);
+begin
+  jvpglst1.ActivePage := jvstndrdpgProjects;
+end;
+
+procedure TMainForm.ctgrybtns1Categories0Items1Click(Sender: TObject);
+begin
+  jvpglst1.ActivePage := jvstndrdpgClients;
+end;
+
+procedure TMainForm.ctgrybtns1Categories1Items0Click(Sender: TObject);
+var
+  Form: TManageClientsDomainsForm;
+begin
+  Form := TManageClientsDomainsForm.Create(Self);
+  Form.ShowModal;
 end;
 
 procedure TMainForm.ProjectsCompletionFilterComboBoxChange(Sender: TObject);
@@ -164,6 +200,11 @@ end;
 procedure TMainForm.FilterIncomplete;
 begin
   FDQuery1.OpenOrExecute;
+end;
+
+procedure TMainForm.FormCreate(Sender: TObject);
+begin
+  ctgrybtns1.SelectedItem := ctgrybtns1.Categories[0].Items[0];
 end;
 
 procedure TMainForm.FormShow(Sender: TObject);

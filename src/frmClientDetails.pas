@@ -8,22 +8,20 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
   FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, uDataModule, frmManageClientsDomains, fraTextEditor,
   Vcl.StdActns, System.Actions, Vcl.ActnList, Vcl.ActnMan, Vcl.ComCtrls, Vcl.ToolWin, Vcl.ActnCtrls,
-  Vcl.ExtCtrls, Vcl.StdStyleActnCtrls, System.ImageList, Vcl.ImgList, Vcl.VirtualImageList;
+  Vcl.ExtCtrls, Vcl.StdStyleActnCtrls, System.ImageList, Vcl.ImgList, Vcl.VirtualImageList,
+  dmClientDetails;
 
 type
   TClientDetailsForm = class(TForm)
     SaveButton: TButton;
     CancelButton: TButton;
-    NameDBEdit: TDBEdit;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    FDQuery1: TFDQuery;
-    DataSource1: TDataSource;
     EditClientGroupButton: TButton;
     DBLookupComboBox1: TDBLookupComboBox;
     TextEditorFrame1: TTextEditorFrame;
-    ToolBar1: TToolBar;
+    edtName: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure CancelButtonClick(Sender: TObject);
@@ -33,7 +31,7 @@ type
   private
     { Private declarations }
 
-    procedure GetData;
+    DataModule: IClientDetailsDM;
   public
     { Public declarations }
 
@@ -52,7 +50,7 @@ var
   Form: TManageClientsDomainsForm;
 begin
   Form := TManageClientsDomainsForm.Create(Self);
-  Form.Show;
+  Form.ShowModal;
 end;
 
 procedure TClientDetailsForm.CancelButtonClick(Sender: TObject);
@@ -67,23 +65,20 @@ end;
 
 procedure TClientDetailsForm.FormCreate(Sender: TObject);
 begin
-  FDQuery1.Connection := MainDataModule.MainFDConnection;
+  DataModule := TClientDetailsDM.Create;
 end;
 
 procedure TClientDetailsForm.FormShow(Sender: TObject);
+var
+  Client: TClient;
 begin
   if ClientId <> 0 then
-    GetData;
-end;
+  begin
+    Client := DataModule.Get(ClientId);
+    edtName.Text := Client.Name;
 
-procedure TClientDetailsForm.GetData;
-begin
-  FDQuery1.SQL.Text := 'SELECT Clients.id, Clients.name, Clients.description, Clients.domain, ClientDomains.name as domainName ' +
-        'FROM Clients ' +
-        'LEFT JOIN ClientDomains ' +
-        'ON Clients.domain= ClientDomains.id WHERE Clients.id = :id';
-  FDQuery1.ParamByName('id').AsInteger := ClientId;
-  FDQuery1.OpenOrExecute;
+    Client.Free;
+  end;
 end;
 
 procedure TClientDetailsForm.SaveButtonClick(Sender: TObject);

@@ -25,6 +25,7 @@ object ManageClientsDomainsForm: TManageClientsDomainsForm
     Height = 25
     Caption = 'Dodaj'
     TabOrder = 0
+    OnClick = btnAddClick
   end
   object btnDelete: TButton
     Left = 231
@@ -32,12 +33,12 @@ object ManageClientsDomainsForm: TManageClientsDomainsForm
     Width = 75
     Height = 25
     Caption = 'Usu'#324
-    Enabled = False
     TabOrder = 1
+    OnClick = btnDeleteClick
   end
   object btnClose: TButton
     Left = 231
-    Top = 279
+    Top = 281
     Width = 75
     Height = 25
     Caption = 'Zamknij'
@@ -50,10 +51,11 @@ object ManageClientsDomainsForm: TManageClientsDomainsForm
     Width = 209
     Height = 21
     TabOrder = 3
+    OnChange = edtNameChange
   end
   object lstDomains: TRzEditListBox
     Left = 16
-    Top = 51
+    Top = 53
     Width = 209
     Height = 253
     ItemHeight = 13
@@ -67,20 +69,7 @@ object ManageClientsDomainsForm: TManageClientsDomainsForm
     Width = 75
     Height = 25
     Caption = 'Edytuj'
-    Enabled = False
     TabOrder = 5
     OnClick = btnEditClick
-  end
-  object FDQuery1: TFDQuery
-    Connection = MainDataModule.MainFDConnection
-    SQL.Strings = (
-      'SELECT * FROM ClientDomains')
-    Left = 232
-    Top = 184
-  end
-  object DataSource1: TDataSource
-    DataSet = FDQuery1
-    Left = 272
-    Top = 184
   end
 end

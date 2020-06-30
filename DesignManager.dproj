@@ -70,7 +70,7 @@
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
         <SanitizedProjectName>DesignManager</SanitizedProjectName>
-        <Custom_Styles>TabletDark|VCLSTYLE|$(BDSCOMMONDIR)\Styles\TabletDark.vsf</Custom_Styles>
+        <Custom_Styles>Glow|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Glow.vsf;Luna|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Luna.vsf;TabletDark|VCLSTYLE|$(BDSCOMMONDIR)\Styles\TabletDark.vsf</Custom_Styles>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;IndyIPCommon;RESTComponents;bindcompdbx;DBXInterBaseDriver;vcl;IndyIPServer;vclactnband;vclFireDAC;IndySystem;tethering;svnui;dsnapcon;FireDACADSDriver;FireDACMSAccDriver;fmxFireDAC;vclimg;FireDAC;vcltouch;vcldb;bindcompfmx;svn;FireDACSqliteDriver;FireDACPgDriver;inetdb;soaprtl;DbxCommonDriver;fmx;FireDACIBDriver;fmxdae;xmlrtl;soapmidas;fmxobj;vclwinx;rtl;DbxClientDriver;CustomIPTransport;vcldsnap;dbexpress;IndyCore;vclx;bindcomp;appanalytics;dsnap;FireDACCommon;IndyIPClient;bindcompvcl;RESTBackendComponents;VCLRESTComponents;soapserver;dbxcds;VclSmp;adortl;vclie;bindengine;DBXMySQLDriver;CloudService;dsnapxml;FireDACMySQLDriver;dbrtl;IndyProtocols;inetdbxpress;FireDACCommonODBC;FireDACCommonDriver;inet;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
@@ -111,9 +111,9 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-        <VerInfo_Build>14</VerInfo_Build>
+        <VerInfo_Build>17</VerInfo_Build>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.14;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.17;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -135,53 +135,54 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="frmMain.pas">
+        <DCCReference Include="src\frmMain.pas">
             <Form>MainForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uDataConnection.pas"/>
-        <DCCReference Include="frmAddProject.pas">
+        <DCCReference Include="src\uDataConnection.pas"/>
+        <DCCReference Include="src\frmAddProject.pas">
             <Form>AddProjectForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uCreateDBQueries.pas"/>
-        <DCCReference Include="frmFirstRunConfig.pas">
+        <DCCReference Include="src\uCreateDBQueries.pas"/>
+        <DCCReference Include="src\frmFirstRunConfig.pas">
             <Form>FirstRunConfigForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uAppConfiguration.pas"/>
-        <DCCReference Include="frmAbout.pas">
+        <DCCReference Include="src\uAppConfiguration.pas"/>
+        <DCCReference Include="src\frmAbout.pas">
             <Form>AboutBoxForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uDataModule.pas">
+        <DCCReference Include="src\uDataModule.pas">
             <Form>MainDataModule</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="frmProjectDetails.pas">
+        <DCCReference Include="src\frmProjectDetails.pas">
             <Form>ProjectDetailsForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="frmClientDetails.pas">
+        <DCCReference Include="src\frmClientDetails.pas">
             <Form>ClientDetailsForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="frmManageClientsDomains.pas">
+        <DCCReference Include="src\frmManageClientsDomains.pas">
             <Form>ManageClientsDomainsForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="fraTextEditor.pas">
+        <DCCReference Include="src\fraTextEditor.pas">
             <Form>TextEditorFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="dmManageClientsDomains.pas">
+        <DCCReference Include="src\dmManageClientsDomains.pas">
             <Form>ManageClientsDomainsDM</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="uClientDomain.pas"/>
+        <DCCReference Include="src\uClientDomain.pas"/>
+        <DCCReference Include="src\dmClientDetails.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
