@@ -3,7 +3,7 @@ object ClientDetailsForm: TClientDetailsForm
   Top = 0
   Hint = 'Align Left|Aligns text at the left indent'
   Caption = 'Align &Left'
-  ClientHeight = 598
+  ClientHeight = 612
   ClientWidth = 642
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,7 +18,7 @@ object ClientDetailsForm: TClientDetailsForm
   OnShow = FormShow
   DesignSize = (
     642
-    598)
+    612)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -30,70 +30,77 @@ object ClientDetailsForm: TClientDetailsForm
   end
   object Label2: TLabel
     Left = 17
-    Top = 128
+    Top = 133
     Width = 21
     Height = 13
     Caption = 'Opis'
   end
   object Label3: TLabel
-    Left = 16
-    Top = 73
+    Left = 17
+    Top = 81
     Width = 91
     Height = 13
     Caption = 'Obszar dzia'#322'alno'#347'ci'
   end
+  object lblNameError: TLabel
+    Left = 17
+    Top = 62
+    Width = 61
+    Height = 13
+    Caption = 'lblNameError'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
   object SaveButton: TButton
     Left = 420
-    Top = 557
+    Top = 571
     Width = 97
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = 'Zapisz'
-    TabOrder = 0
+    TabOrder = 4
     OnClick = SaveButtonClick
+    ExplicitTop = 557
   end
   object CancelButton: TButton
     Left = 523
-    Top = 557
+    Top = 571
     Width = 103
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = 'Anuluj'
-    TabOrder = 1
+    TabOrder = 5
     OnClick = CancelButtonClick
+    ExplicitTop = 557
   end
   object EditClientGroupButton: TButton
     Left = 238
-    Top = 90
+    Top = 99
     Width = 95
     Height = 25
     Caption = 'Zarz'#261'dzaj'
     TabOrder = 2
     OnClick = EditClientGroupButtonClick
   end
-  object DBLookupComboBox1: TDBLookupComboBox
-    Left = 17
-    Top = 92
-    Width = 215
-    Height = 21
-    KeyField = 'domain'
-    ListField = 'domainName'
-    TabOrder = 3
-  end
   inline TextEditorFrame1: TTextEditorFrame
     Left = 16
     Top = 152
     Width = 609
-    Height = 385
+    Height = 399
     Anchors = [akLeft, akTop, akRight, akBottom]
-    TabOrder = 4
+    TabOrder = 3
     ExplicitLeft = 16
     ExplicitTop = 152
     ExplicitWidth = 609
     ExplicitHeight = 385
     inherited JvRichEdit1: TJvRichEdit
       Width = 609
-      Height = 328
+      Height = 342
+      TabOrder = 1
       ExplicitWidth = 609
       ExplicitHeight = 328
     end
@@ -126,7 +133,15 @@ object ClientDetailsForm: TClientDetailsForm
     Top = 35
     Width = 608
     Height = 21
-    TabOrder = 5
+    TabOrder = 0
     Text = 'edtName'
+    OnChange = edtNameChange
+  end
+  object cbbClientsDomains: TComboBox
+    Left = 17
+    Top = 100
+    Width = 215
+    Height = 21
+    TabOrder = 1
   end
 end

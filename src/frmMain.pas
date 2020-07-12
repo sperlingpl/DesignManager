@@ -14,8 +14,8 @@ uses
   FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, Vcl.Mask, Vcl.DBCtrls, uDataModule, System.Rtti,
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt, Vcl.Bind.DBEngExt, Data.Bind.Components,
   Data.Bind.DBScope, System.DateUtils, frmProjectDetails, Vcl.Grids, Vcl.DBGrids, Vcl.Touch.GestureCtrls,
-  frmClientDetails, ovcbase, ovcclock, ChromeTabs, Vcl.RibbonLunaStyleActnCtrls, Vcl.Ribbon, Vcl.ExtCtrls, Vcl.WinXCtrls,
-  Vcl.CategoryButtons, JvPageList, JvExControls, Vcl.WinXCalendars, frmManageClientsDomains;
+  frmClientDetails, Vcl.ExtCtrls, Vcl.WinXCtrls, System.Generics.Collections, uClient,
+  Vcl.CategoryButtons, JvPageList, JvExControls, Vcl.WinXCalendars, frmManageClientsDomains, vmMain;
 
 type
   TMainForm = class(TForm)
@@ -62,6 +62,7 @@ type
     procedure ctgrybtns1Categories1Items0Click(Sender: TObject);
   private
     { Private declarations }
+    viewModel: IMainVM;
 
     procedure FillProjectList;
     procedure FilterAll;
@@ -107,9 +108,14 @@ procedure TMainForm.ClientsListViewDblClick(Sender: TObject);
 var
   Form: TClientDetailsForm;
 begin
+  if ClientsListView.Selected = nil then
+    Exit;
+
   Form := TClientDetailsForm.Create(Self);
   Form.ClientId := StrToInt(ClientsListView.Selected.Caption);
-  Form.Show;
+  Form.ShowModal;
+
+  FillClientsList;
 end;
 
 procedure TMainForm.ctgrybtns1Categories0Items0Click(Sender: TObject);
@@ -151,23 +157,28 @@ end;
 procedure TMainForm.FillClientsList;
 var
   ListItem: TListItem;
+  Clients: TList<TClient>;
+  Client: TClient;
 begin
   ClientsListView.Items.Clear;
 
-  ClientsFDQuery.OpenOrExecute;
+  Clients := viewModel.GetClients;
 
-  while not ClientsFDQuery.Eof do
+  for Client in Clients do
   begin
     ListItem := ClientsListView.Items.Add;
 
     with ListItem do
     begin
-      Caption := ClientsFDQuery.FieldByName('id').AsString;
-      SubItems.Add(ClientsFDQuery.FieldByName('name').AsString);
-      SubItems.Add(ClientsFDQuery.FieldByName('description').AsString);
-      ClientsFDQuery.Next;
+      Caption := IntToStr(Client.Id);
+      SubItems.Add(Client.Name);
+      SubItems.Add('av');
+
+      Client.Free;
     end;
   end;
+
+  Clients.Free;
 end;
 
 procedure TMainForm.FillProjectList;
@@ -204,6 +215,7 @@ end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
+  viewModel := TMainVM.Create;
   ctgrybtns1.SelectedItem := ctgrybtns1.Categories[0].Items[0];
 end;
 

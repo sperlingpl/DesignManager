@@ -17,4 +17,10 @@ object MainDataModule: TMainDataModule
     Left = 80
     Top = 40
   end
+  object fdgxwtcrsr1: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    ScreenCursor = gcrHourGlass
+    Left = 136
+    Top = 40
+  end
 end

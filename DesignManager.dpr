@@ -17,13 +17,25 @@ uses
   frmManageClientsDomains in 'src\frmManageClientsDomains.pas' {ManageClientsDomainsForm},
   fraTextEditor in 'src\fraTextEditor.pas' {TextEditorFrame: TFrame},
   dmManageClientsDomains in 'src\dmManageClientsDomains.pas' {ManageClientsDomainsDM: TDataModule},
-  uClientDomain in 'src\uClientDomain.pas',
-  dmClientDetails in 'src\dmClientDetails.pas';
+  uClientDomain in 'src\model\uClientDomain.pas',
+  dmClient in 'src\dm\dmClient.pas',
+  uClientsDomains in 'src\uClientsDomains.pas',
+  uClient in 'src\model\uClient.pas',
+  vmMain in 'src\vmMain.pas',
+  uProject in 'src\model\uProject.pas',
+  dmProject in 'src\dm\dmProject.pas',
+  vmClientDetails in 'src\vmClientDetails.pas',
+  uValidationItem in 'src\validation\uValidationItem.pas',
+  uValidator in 'src\validation\uValidator.pas',
+  uEmptyTextValidator in 'src\validation\uEmptyTextValidator.pas';
 
 {$R *.res}
 
 begin
+  {$WARNINGS OFF}
   ReportMemoryLeaksOnShutdown := DebugHook <> 0;
+  {$WARNINGS ON}
+
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   TStyleManager.TrySetStyle('Luna');

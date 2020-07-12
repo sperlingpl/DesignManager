@@ -5,12 +5,13 @@ interface
 uses
   System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf,
   FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
-  FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client;
+  FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client, FireDAC.Comp.UI;
 
 type
   TMainDataModule = class(TDataModule)
     MainFDConnection: TFDConnection;
     FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
+    fdgxwtcrsr1: TFDGUIxWaitCursor;
   private
     { Private declarations }
 
@@ -18,6 +19,7 @@ type
   public
     { Public declarations }
     procedure Connect(Path: String);
+    function GetQuery: TFDQuery;
   end;
 
 var
@@ -28,7 +30,7 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 uses
-  FireDAC.Dapt, uCreateDBQueries;
+  FireDAC.Dapt, FireDAC.Stan.Param, uCreateDBQueries;
 
 const
   DBVersion = 1;
@@ -76,6 +78,12 @@ begin
   fdQuery.Free;
 
   MainDataModule.MainFDConnection.Commit;
+end;
+
+function TMainDataModule.GetQuery: TFDQuery;
+begin
+  Result := TFDQuery.Create(nil);
+  Result.Connection := Self.MainFDConnection;
 end;
 
 end.

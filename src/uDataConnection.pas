@@ -20,7 +20,7 @@ var
 implementation
 
 uses
-  System.SysUtils, FireDAC.phys.Intf, FireDAC.Dapt,
+  System.SysUtils, FireDAC.phys.Intf, FireDAC.Dapt, FireDAC.Stan.Param,
   uCreateDBQueries, uDataModule;
 
 const
