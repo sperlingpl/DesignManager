@@ -35,6 +35,8 @@ type
 
     DataModule: IClientDM;
     ViewModel: TClientDetailsVM;
+
+    procedure OnCanSaveChanged(const Value: Boolean);
   public
     { Public declarations }
 
@@ -112,6 +114,8 @@ procedure TClientDetailsForm.FormCreate(Sender: TObject);
 begin
   DataModule := TClientDM.Create;
   ViewModel := TClientDetailsVM.Create;
+
+  ViewModel.OnCanSaveChanged := OnCanSaveChanged;
 end;
 
 procedure TClientDetailsForm.FormShow(Sender: TObject);
@@ -129,6 +133,11 @@ begin
 
     Client.Free;
   end;
+end;
+
+procedure TClientDetailsForm.OnCanSaveChanged(const Value: Boolean);
+begin
+  SaveButton.Enabled := Value;
 end;
 
 procedure TClientDetailsForm.SaveButtonClick(Sender: TObject);

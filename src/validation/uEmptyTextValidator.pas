@@ -6,10 +6,10 @@ uses
   uValidator;
 
 type
-  TEmptyTextValidator = class(TInterfacedObject, IValidator)
+  TEmptyTextValidator = class(TInterfacedObject, IValidator<String>)
 
   public
-    function Validate: Boolean;
+    function Validate(const Value: String): Boolean;
     function GetErrorMessage: string;
   end;
 
@@ -22,9 +22,10 @@ begin
   Result := 'Wartość nie może być pusta.';
 end;
 
-function TEmptyTextValidator.Validate: Boolean;
+
+function TEmptyTextValidator.Validate(const Value: String): Boolean;
 begin
-  Result := False;
+  Result := Value <> '';
 end;
 
 end.

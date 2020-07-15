@@ -27,7 +27,8 @@ uses
   vmClientDetails in 'src\vmClientDetails.pas',
   uValidationItem in 'src\validation\uValidationItem.pas',
   uValidator in 'src\validation\uValidator.pas',
-  uEmptyTextValidator in 'src\validation\uEmptyTextValidator.pas';
+  uEmptyTextValidator in 'src\validation\uEmptyTextValidator.pas',
+  uViewModel in 'src\uViewModel.pas';
 
 {$R *.res}
 

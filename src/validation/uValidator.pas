@@ -3,8 +3,8 @@ unit uValidator;
 interface
 
 type
-  IValidator = interface(IInterface)
-    function Validate: Boolean;
+  IValidator<T> = interface(IInterface)
+    function Validate(const Value: T): Boolean;
     function GetErrorMessage: String;
   end;
 

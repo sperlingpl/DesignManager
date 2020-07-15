@@ -8,7 +8,7 @@ object MainDataModule: TMainDataModule
         'Database=C:\Users\pawel\Documents\Delphi\DesignManager\Win64\Deb' +
         'ug\data.ddb'
       'StringFormat=Unicode'
-      'ConnectionDef=DesignStore')
+      'DriverID=SQLite')
     LoginPrompt = False
     Left = 32
     Top = 40

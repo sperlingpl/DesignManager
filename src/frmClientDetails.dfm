@@ -64,7 +64,6 @@ object ClientDetailsForm: TClientDetailsForm
     Caption = 'Zapisz'
     TabOrder = 4
     OnClick = SaveButtonClick
-    ExplicitTop = 557
   end
   object CancelButton: TButton
     Left = 523
@@ -75,7 +74,6 @@ object ClientDetailsForm: TClientDetailsForm
     Caption = 'Anuluj'
     TabOrder = 5
     OnClick = CancelButtonClick
-    ExplicitTop = 557
   end
   object EditClientGroupButton: TButton
     Left = 238
@@ -96,13 +94,13 @@ object ClientDetailsForm: TClientDetailsForm
     ExplicitLeft = 16
     ExplicitTop = 152
     ExplicitWidth = 609
-    ExplicitHeight = 385
+    ExplicitHeight = 399
     inherited JvRichEdit1: TJvRichEdit
       Width = 609
       Height = 342
       TabOrder = 1
       ExplicitWidth = 609
-      ExplicitHeight = 328
+      ExplicitHeight = 342
     end
     inherited CoolBar1: TCoolBar
       Width = 609

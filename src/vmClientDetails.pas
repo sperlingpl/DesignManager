@@ -3,13 +3,14 @@ unit vmClientDetails;
 interface
 
 uses
-  uValidationItem;
+  uViewModel, uValidationItem;
 
 type
   TClientDetailsVM = class
   private
     FName: TValidationItem<String>;
-    
+    FOnCanSaveChanged: TOnPropertyChanged<Boolean>;
+
     procedure SetName(const Value: String);
     function GetName: String;
     function GetCanSave: Boolean;
@@ -17,9 +18,10 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    
+
     property Name: String read GetName write SetName;
     property CanSave: Boolean read GetCanSave;
+    property OnCanSaveChanged: TOnPropertyChanged<Boolean> read FOnCanSaveChanged write FOnCanSaveChanged;
   end;
 
 implementation
@@ -52,7 +54,8 @@ end;
 
 procedure TClientDetailsVM.SetName(const Value: String);
 begin
-  FName.Value := Value;  
+  FName.Value := Value;
+  OnCanSaveChanged(FName.Validate);
 end;
 
 end.
