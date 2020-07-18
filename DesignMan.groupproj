@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{EB0A5187-6650-4722-90E7-EF5B37BDC384}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="app\DesignManager.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="tests\DesignManagerTests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="DesignManager">
+        <MSBuild Projects="app\DesignManager.dproj"/>
+    </Target>
+    <Target Name="DesignManager:Clean">
+        <MSBuild Projects="app\DesignManager.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DesignManager:Make">
+        <MSBuild Projects="app\DesignManager.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DesignManagerTests">
+        <MSBuild Projects="tests\DesignManagerTests.dproj"/>
+    </Target>
+    <Target Name="DesignManagerTests:Clean">
+        <MSBuild Projects="tests\DesignManagerTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DesignManagerTests:Make">
+        <MSBuild Projects="tests\DesignManagerTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="DesignManager;DesignManagerTests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="DesignManager:Clean;DesignManagerTests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="DesignManager:Make;DesignManagerTests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

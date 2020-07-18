@@ -1,7 +1,7 @@
 object MainForm: TMainForm
   Left = 347
   Top = 318
-  Caption = 'MainForm'
+  Caption = 'S'
   ClientHeight = 525
   ClientWidth = 810
   Color = clBtnFace
